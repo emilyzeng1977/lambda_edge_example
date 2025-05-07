@@ -1,0 +1,23 @@
+# Python virtual environments
+.venv/
+
+# Python bytecode
+__pycache__/
+*.pyc
+
+# Terraform state and cache
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup
+terraform/.terraform/
+terraform/.terraform.lock.hcl
+
+# Lambda deployment packages
+terraform/*.zip
+
+# Editor settings
+.vscode/
+.idea/
+
+# OS system files
+.DS_Store
+Thumbs.db

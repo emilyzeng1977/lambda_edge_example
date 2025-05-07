@@ -2,7 +2,7 @@ import jwt
 import datetime
 
 # 密钥（仅自己使用，勿泄露）
-secret_key = "my_secret_key"
+secret_key = "your-secret-key"
 
 # 创建 payload（负载信息）
 payload = {

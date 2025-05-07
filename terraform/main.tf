@@ -40,12 +40,12 @@ resource "aws_iam_role_policy_attachment" "lambda_basic" {
 resource "aws_lambda_function" "edge_lambda" {
   provider         = aws.edge
   function_name    = "cloudfront-edge-hello"
-  filename         = "${path.module}/default_viewer_request_handler.zip" # 请预先准备此文件
+  filename         = "${path.module}/../packages/default_viewer_request_handler.zip" # 请预先准备此文件
   handler          = "default_viewer_request_handler.lambda_handler"
   runtime          = "python3.10"
   role             = aws_iam_role.lambda_role.arn
   publish          = true
-  source_code_hash = filebase64sha256("${path.module}/default_viewer_request_handler.zip")
+  source_code_hash = filebase64sha256("${path.module}/../packages/default_viewer_request_handler.zip")
 
   depends_on = [null_resource.zip_lambda]
 }
@@ -124,11 +124,11 @@ resource "aws_cloudfront_distribution" "cdn" {
 
 resource "null_resource" "zip_lambda" {
   provisioner "local-exec" {
-    command     = "zip -j default_viewer_request_handler.zip ../lambda/edge/default_viewer_request_handler.py"
-    working_dir = path.module
+    command = "${path.module}/../scripts/lambda_edge_build.sh"
   }
 
   triggers = {
-    always_run = "${timestamp()}" # 每次 apply 都会重新执行
+    requirements_hash = filesha256("../lambda/edge/requirements.txt")
+    code_hash         = filesha256("../lambda/edge/default_viewer_request_handler.py")
   }
 }

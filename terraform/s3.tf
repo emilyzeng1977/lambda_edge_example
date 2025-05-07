@@ -31,6 +31,7 @@ resource "aws_s3_bucket_policy" "web_policy" {
       }
     ]
   })
+  depends_on = [aws_s3_bucket_public_access_block.allow_public]
 }
 
 resource "aws_s3_object" "index" {

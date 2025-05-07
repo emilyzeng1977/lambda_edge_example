@@ -124,7 +124,7 @@ resource "aws_cloudfront_distribution" "cdn" {
 
 resource "null_resource" "zip_lambda" {
   provisioner "local-exec" {
-    command     = "zip -j default_viewer_request_handler.zip ../lambda/default_viewer_request_handler.py"
+    command     = "zip -j default_viewer_request_handler.zip ../lambda/edge/default_viewer_request_handler.py"
     working_dir = path.module
   }
 

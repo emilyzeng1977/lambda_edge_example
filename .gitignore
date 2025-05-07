@@ -1,6 +1,10 @@
 # Python virtual environments
 .venv/
 
+# Editor settings
+.vscode/
+.idea/
+
 # Python bytecode
 __pycache__/
 *.pyc
@@ -13,10 +17,6 @@ terraform/.terraform.lock.hcl
 
 # Lambda deployment packages
 terraform/*.zip
-
-# Editor settings
-.vscode/
-.idea/
 
 # OS system files
 .DS_Store

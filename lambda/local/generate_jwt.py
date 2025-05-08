@@ -8,7 +8,7 @@ secret_key = "your-secret-key"
 payload = {
     "user_id": 123,
     "username": "alice",
-    "exp": datetime.datetime.utcnow() + datetime.timedelta(hours=1)  # 1 小时后过期
+    "exp": datetime.datetime.utcnow() + datetime.timedelta(hours=24)  # 24 小时后过期
 }
 
 # 编码生成 token

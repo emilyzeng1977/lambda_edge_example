@@ -28,7 +28,8 @@ def lambda_handler(event, context):
             "statusDescription": "OK",
             "body": json.dumps({
                 "message": "JWT valid",
-                "user": payload.get("user", "unknown")
+                "user_id": payload.get("user_id"),
+                "username": payload.get("username")
             }),
             "headers": {
                 "content-type": [{"key": "Content-Type", "value": "application/json"}]

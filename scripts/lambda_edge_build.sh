@@ -19,5 +19,7 @@ cp ../lambda/edge/default_viewer_request_handler.py $BUILD_DIR/
 # 打包为 lambda zip 文件
 cd $BUILD_DIR
 
-rm ../$ZIP_NAME
+# 只在 ZIP 文件存在时才删除
+[ -f "../$ZIP_NAME" ] && rm "../$ZIP_NAME"
+
 zip -r ../$ZIP_NAME .

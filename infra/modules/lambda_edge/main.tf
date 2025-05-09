@@ -1,3 +1,7 @@
+terraform {
+  backend "s3" {}
+}
+
 provider "aws" {
   alias  = "edge"
   region = var.region
@@ -34,24 +38,24 @@ resource "aws_iam_role_policy_attachment" "lambda_basic" {
 
 resource "null_resource" "zip_lambda" {
   provisioner "local-exec" {
-    command = "${path.module}/../../scripts/lambda_edge_build.sh"
+    command = "cd ${var.lambda_script_path} && ./${var.lambda_script_file}"
   }
 
   triggers = {
-    requirements_hash = filesha256(var.requirements_file)
-    code_hash         = filesha256(var.lambda_code_file)
+    requirements_hash = filesha256(var.lambda_requirements_file)
+    code_hash         = filesha256(var.lambda_source_file)
   }
 }
 
 resource "aws_lambda_function" "edge_lambda" {
   provider         = aws.edge
   function_name    = "cloudfront-edge-hello"
-  filename         = var.lambda_zip_path
+  filename         = var.lambda_package_file
   handler          = var.handler
   runtime          = var.runtime
   role             = aws_iam_role.lambda_role.arn
   publish          = true
-  source_code_hash = filebase64sha256(var.lambda_zip_path)
+  source_code_hash = filebase64sha256(var.lambda_source_file)
 
   depends_on = [null_resource.zip_lambda]
 }

@@ -1,26 +1,27 @@
 locals {
-  region_edge = "us-east-1"
-  region_cdn  = "ap-southeast-2"
+  region        = "ap-southeast-2"               # 替换为实际的 AWS 区域
+  bucket        = "tfstate-emily"                # 远程 S3 桶
+  dynamodb_table = "tfstate-lock-emily"          # DynamoDB 锁表
 }
 
-generate "provider_edge" {
-  path      = "provider_edge.tf"
-  if_exists = "overwrite_terragrunt"
-  contents  = <<EOF
-provider "aws" {
-  region = "${local.region_edge}"
-  alias  = "edge"
-}
-EOF
+remote_state {
+  backend = "s3"
+  config = {
+    bucket         = local.bucket
+    key            = "${path_relative_to_include()}/terraform.tfstate"
+    region         = local.region
+    encrypt        = true
+    dynamodb_table = local.dynamodb_table
+  }
 }
 
-generate "provider_cdn" {
-  path      = "provider_cdn.tf"
-  if_exists = "overwrite_terragrunt"
+# 可选：生成默认 provider 配置供子模块使用
+generate "provider" {
+  path      = "provider.tf"
+  if_exists = "overwrite"
   contents  = <<EOF
 provider "aws" {
-  region = "${local.region_cdn}"
-  alias  = "cdn"
+  region = "${local.region}"
 }
 EOF
 }

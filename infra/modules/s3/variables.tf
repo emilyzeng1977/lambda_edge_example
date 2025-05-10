@@ -1,8 +1,3 @@
-variable "region" {
-  description = "AWS region to deploy resources into"
-  type        = string
-}
-
 variable "bucket_name" {
   description = "The name of the S3 bucket to create"
   type        = string

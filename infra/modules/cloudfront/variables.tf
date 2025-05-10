@@ -1,8 +1,3 @@
-variable "region" {
-  description = "Region for CloudFront (typically ap-southeast-2)"
-  type        = string
-}
-
 variable "lambda_function_arn" {
   description = "ARN of the Lambda@Edge function"
   type        = string

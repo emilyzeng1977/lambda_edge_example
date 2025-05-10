@@ -1,8 +1,3 @@
-variable "region" {
-  description = "Region for Lambda@Edge (must be us-east-1)"
-  type        = string
-}
-
 variable "lambda_package_file" {
   description = "Path to the packaged Lambda ZIP"
   type        = string

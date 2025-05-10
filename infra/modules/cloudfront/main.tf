@@ -1,10 +1,9 @@
-provider "aws" {
-  alias  = "cdn"
-  region = var.region
+terraform {
+  backend "s3" {}
 }
 
 resource "aws_cloudfront_distribution" "cdn" {
-  provider            = aws.cdn
+  provider            = aws.default
   enabled             = true
   default_root_object = "static/index.html"
 

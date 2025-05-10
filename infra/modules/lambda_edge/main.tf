@@ -2,10 +2,10 @@ terraform {
   backend "s3" {}
 }
 
-provider "aws" {
-  alias  = "edge"
-  region = var.region
-}
+# provider "aws" {
+#   alias  = "edge"
+#   region = var.region
+# }
 
 resource "aws_iam_role" "lambda_role" {
   name = "lambda_edge_role"

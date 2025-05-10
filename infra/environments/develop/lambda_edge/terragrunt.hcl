@@ -1,5 +1,5 @@
 include {
-  path = find_in_parent_folders("terragrunt.hcl")
+  path = find_in_parent_folders("root.hcl")
 }
 
 terraform {
@@ -7,7 +7,6 @@ terraform {
 }
 
 inputs = {
-  region                    = "us-east-1"
   lambda_requirements_file  = "${get_terragrunt_dir()}/../../../../lambda/edge/requirements.txt"
   lambda_source_file        = "${get_terragrunt_dir()}/../../../../lambda/edge/default_viewer_request_handler.py"
   lambda_package_file       = "${get_terragrunt_dir()}/../../../../packages/default_viewer_request_handler.zip"

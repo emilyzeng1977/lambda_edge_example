@@ -15,7 +15,7 @@ dependency "s3" {
 }
 
 inputs = {
-  region                = "ap-southeast-2"
+  # region                = "ap-southeast-2"
   lambda_function_arn   = dependency.lambda_edge.outputs.lambda_qualified_arn
   bucket_domain_name    = dependency.s3.outputs.bucket_regional_domain_name
 }

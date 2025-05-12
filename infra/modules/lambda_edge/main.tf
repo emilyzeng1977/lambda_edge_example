@@ -2,11 +2,6 @@ terraform {
   backend "s3" {}
 }
 
-# provider "aws" {
-#   alias  = "edge"
-#   region = var.region
-# }
-
 resource "aws_iam_role" "lambda_role" {
   name = "lambda_edge_role"
 
@@ -49,7 +44,7 @@ resource "null_resource" "zip_lambda" {
 
 resource "aws_lambda_function" "edge_lambda" {
   provider         = aws.edge
-  function_name    = "cloudfront-edge-hello"
+  function_name    = "cloudfront-lambda-edge-demo"
   filename         = var.lambda_package_file
   handler          = var.handler
   runtime          = var.runtime

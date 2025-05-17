@@ -17,6 +17,10 @@ remote_state {
   }
 }
 
+inputs = {
+  project = local.project
+}
+
 # 可选：生成默认 provider 配置供子模块使用
 generate "provider" {
   path      = "provider.tf"

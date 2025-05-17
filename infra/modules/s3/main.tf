@@ -5,6 +5,10 @@ terraform {
 resource "aws_s3_bucket" "web_bucket" {
   provider = aws.default
   bucket = var.bucket_name
+  tags = {
+    Project     = var.project
+    Environment = var.env
+  }
 }
 
 resource "aws_s3_bucket_public_access_block" "allow_public" {

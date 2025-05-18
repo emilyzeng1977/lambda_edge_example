@@ -3,39 +3,23 @@ version: 2.1
 jobs:
   plan:
     docker:
-      - image: cimg/base:stable
+      - image: devopsinfra/docker-terragrunt:latest
     steps:
       - checkout
       - run:
-          name: Install Terragrunt
+          name: Terragrunt Plan
           command: |
-            sudo apt-get update && sudo apt-get install -y curl unzip
-            curl -L https://github.com/gruntwork-io/terragrunt/releases/download/v0.55.17/terragrunt_linux_amd64 -o terragrunt
-            chmod +x terragrunt
-            sudo mv terragrunt /usr/local/bin/terragrunt
-      - run:
-          name: Terragrunt Plan All
-          command: |
-            pwd
             cd infra/environments/develop
-            terragrunt run-all plan
+            terragrunt run-all plan --terragrunt-non-interactive
 
   apply:
     docker:
-      - image: cimg/base:stable
+      - image: devopsinfra/docker-terragrunt:latest
     steps:
       - checkout
       - run:
-          name: Install Terragrunt
+          name: Terragrunt Apply
           command: |
-            sudo apt-get update && sudo apt-get install -y curl unzip
-            curl -L https://github.com/gruntwork-io/terragrunt/releases/download/v0.55.17/terragrunt_linux_amd64 -o terragrunt
-            chmod +x terragrunt
-            sudo mv terragrunt /usr/local/bin/terragrunt
-      - run:
-          name: Terragrunt Apply All
-          command: |
-            pwd
             cd infra/environments/develop
             terragrunt run-all apply --terragrunt-non-interactive
 

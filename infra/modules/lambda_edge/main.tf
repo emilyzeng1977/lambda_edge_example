@@ -43,6 +43,7 @@ resource "null_resource" "zip_lambda" {
 }
 
 resource "aws_lambda_function" "edge_lambda" {
+  provider         = aws.edge
   function_name    = "cloudfront-lambda-edge-demo"
   filename         = var.lambda_package_file
   handler          = var.handler

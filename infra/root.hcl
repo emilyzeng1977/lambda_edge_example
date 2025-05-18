@@ -3,7 +3,7 @@ locals {
   bucket        = "tfstate-emily"                # 远程 S3 桶
   dynamodb_table = "tfstate-lock-emily"          # DynamoDB 锁表
   project       = "book_store"  # 设置项目名为 book_store
-  #region        = "ap-sou-2"
+  edge_region   = "us-east-1"
 }
 
 remote_state {
@@ -29,6 +29,11 @@ generate "provider" {
 provider "aws" {
   region = "${local.region}"
   alias  = "default"
+}
+
+provider "aws" {
+  region = "${local.edge_region}"
+  alias  = "edge"
 }
 EOF
 }

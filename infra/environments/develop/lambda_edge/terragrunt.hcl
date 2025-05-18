@@ -6,6 +6,10 @@ terraform {
   source = "../../../modules/lambda_edge"
 }
 
+locals {
+  region        = "ap-sou-2"
+}
+
 inputs = {
   lambda_requirements_file  = "${get_terragrunt_dir()}/../../../../lambda/edge/requirements.txt"
   lambda_source_file        = "${get_terragrunt_dir()}/../../../../lambda/edge/default_viewer_request_handler.py"
@@ -14,4 +18,14 @@ inputs = {
   lambda_script_file        = "lambda_edge_build.sh"
   handler                   = "default_viewer_request_handler.lambda_handler"
   runtime                   = "python3.10"
+}
+
+generate "provider" {
+  path      = "provider.tf"
+  if_exists = "overwrite"
+  contents  = <<EOF
+provider "aws" {
+  region = "${local.region}"
+}
+EOF
 }

@@ -3,7 +3,6 @@ terraform {
 }
 
 resource "aws_cloudfront_distribution" "cdn" {
-  provider            = aws.default
   enabled             = true
   default_root_object = "static/index.html"
 

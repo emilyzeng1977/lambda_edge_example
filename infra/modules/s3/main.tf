@@ -3,7 +3,6 @@ terraform {
 }
 
 resource "aws_s3_bucket" "web_bucket" {
-  provider = aws.default
   bucket = var.bucket_name
   tags = {
     Project     = var.project
@@ -12,7 +11,6 @@ resource "aws_s3_bucket" "web_bucket" {
 }
 
 resource "aws_s3_bucket_public_access_block" "allow_public" {
-  provider = aws.default
   bucket = aws_s3_bucket.web_bucket.id
 
   block_public_acls       = false
@@ -22,7 +20,6 @@ resource "aws_s3_bucket_public_access_block" "allow_public" {
 }
 
 resource "aws_s3_bucket_policy" "web_policy" {
-  provider = aws.default
   bucket = aws_s3_bucket.web_bucket.id
 
   policy = jsonencode({
@@ -42,7 +39,6 @@ resource "aws_s3_bucket_policy" "web_policy" {
 }
 
 resource "aws_s3_object" "index" {
-  provider = aws.default
   bucket       = aws_s3_bucket.web_bucket.id
   key          = "static/index.html"
   source       = var.index_file

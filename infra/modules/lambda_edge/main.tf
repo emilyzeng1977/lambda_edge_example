@@ -3,6 +3,7 @@ terraform {
 }
 
 resource "aws_iam_role" "lambda_role" {
+  provider         = aws.edge
   name = "lambda_edge_role"
 
   assume_role_policy = jsonencode({
@@ -27,6 +28,7 @@ resource "aws_iam_role" "lambda_role" {
 }
 
 resource "aws_iam_role_policy_attachment" "lambda_basic" {
+  provider         = aws.edge
   role       = aws_iam_role.lambda_role.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }

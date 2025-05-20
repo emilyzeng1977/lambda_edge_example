@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   plan:
     docker:
-      - image: devopsinfra/docker-terragrunt:0.78.1
+      - image: zengemily79/terragrunt:0.78.1
     steps:
       - checkout
       - run:
@@ -14,7 +14,7 @@ jobs:
 
   apply:
     docker:
-      - image: devopsinfra/docker-terragrunt:0.78.1
+      - image: zengemily79/terragrunt:0.78.1
     steps:
       - checkout
       - run:

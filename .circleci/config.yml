@@ -10,7 +10,7 @@ jobs:
           name: Terragrunt Plan
           command: |
             cd infra/environments/develop/lambda_edge
-            terragrunt run-all plan --terragrunt-non-interactive
+            terragrunt plan all
 
   apply:
     docker:

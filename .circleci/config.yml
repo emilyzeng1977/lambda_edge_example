@@ -9,7 +9,7 @@ jobs:
       - run:
           name: Terragrunt Plan
           command: |
-            cd infra/environments/develop/s3
+            cd infra/environments/develop/lambda_edge
             terragrunt run-all plan --terragrunt-non-interactive
 
   apply:
@@ -20,7 +20,7 @@ jobs:
       - run:
           name: Terragrunt Apply
           command: |
-            cd infra/environments/develop/s3
+            cd infra/environments/develop/lambda_edge
             terragrunt run-all apply --terragrunt-non-interactive
 
 workflows:

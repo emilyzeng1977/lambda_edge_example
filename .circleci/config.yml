@@ -21,7 +21,7 @@ jobs:
           name: Terragrunt Apply
           command: |
             cd infra/environments/develop/lambda_edge
-            terragrunt zip_lambdarun-all apply --terragrunt-non-interactive
+            terragrunt apply --all --non-interactive
 
 workflows:
   version: 2

@@ -35,7 +35,7 @@ resource "aws_iam_role_policy_attachment" "lambda_basic" {
 
 resource "null_resource" "zip_lambda" {
   provisioner "local-exec" {
-    command = "cd ${var.lambda_script_path} && ./${var.lambda_script_file}"
+    command = "cd ${var.lambda_script_path} && ./${var.lambda_script_file} ${var.lambda_package_path}"
   }
 
   triggers = {
@@ -47,7 +47,7 @@ resource "null_resource" "zip_lambda" {
 resource "aws_lambda_function" "edge_lambda" {
   provider         = aws.edge
   function_name    = "cloudfront-lambda-edge-demo"
-  filename         = var.lambda_package_file
+  filename         = "${var.lambda_package_path}${var.lambda_package_file}"
   handler          = var.handler
   runtime          = var.runtime
   role             = aws_iam_role.lambda_role.arn

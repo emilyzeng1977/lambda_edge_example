@@ -1,5 +1,10 @@
-variable "lambda_package_file" {
+variable "lambda_package_path" {
   description = "Path to the packaged Lambda ZIP"
+  type        = string
+}
+
+variable "lambda_package_file" {
+  description = "the packaged Lambda ZIP"
   type        = string
 }
 
@@ -9,7 +14,7 @@ variable "lambda_script_path" {
 }
 
 variable "lambda_script_file" {
-  description = "Path to lambda_script_file"
+  description = "lambda_script_file"
   type        = string
 }
 

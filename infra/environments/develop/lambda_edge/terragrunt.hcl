@@ -32,7 +32,7 @@ inputs = {
   lambda_package_file = "default_viewer_request_handler.zip"
 
   # 构建脚本的路径和文件名
-  lambda_script_path = "${local.base_dir}scripts"
+  lambda_script_path = "${local.base_dir}scripts/"
   lambda_script_file = "lambda_edge_build.sh"
 
   # Lambda 运行时相关配置

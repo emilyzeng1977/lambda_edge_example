@@ -21,10 +21,13 @@ jobs:
           name: Terragrunt Apply
           command: |
             pwd
+            echo "---"
             ls
-            ls /root
+            echo "---"
             ls /root/project
+            echo "---"
             ls /root/project/infra
+            echo "---"
             ls /root/project/infra/packages
             ls /root/project/infra/environments/develop/lambda_edge/../../../../
             cd infra/environments/develop/lambda_edge

@@ -20,16 +20,6 @@ jobs:
       - run:
           name: Terragrunt Apply
           command: |
-            pwd
-            echo "---"
-            ls
-            echo "---"
-            ls /root/project
-            echo "---"
-            ls /root/project/infra
-            echo "---"
-            ls /root/project/infra/packages
-            ls /root/project/infra/environments/develop/lambda_edge/../../../../
             cd infra/environments/develop/lambda_edge
             terragrunt apply --all --non-interactive
 

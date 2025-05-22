@@ -35,7 +35,7 @@ resource "aws_iam_role_policy_attachment" "lambda_basic" {
 
 resource "null_resource" "zip_lambda" {
   provisioner "local-exec" {
-    command = "&& ./${var.lambda_script_path}${var.lambda_script_file} ${var.lambda_package_path}"
+    command = "${var.lambda_script_path}${var.lambda_script_file} ${var.lambda_package_path}"
   }
 
   triggers = {

@@ -1,7 +1,16 @@
 #!/bin/bash
 set -e
 
-cd ../packages
+# 传入包路径参数，默认是 ../packages
+PACKAGE_PATH=${1:-../packages}
+
+# 若 PACKAGE_PATH 不存在就创建
+if [ ! -d "$PACKAGE_PATH" ]; then
+  echo "Creating package path: $PACKAGE_PATH"
+  mkdir -p "$PACKAGE_PATH"
+fi
+
+cd "$PACKAGE_PATH"
 
 BUILD_DIR="build"
 ZIP_NAME="default_viewer_request_handler.zip"

@@ -1,0 +1,37 @@
+version: 2.1
+
+jobs:
+  plan:
+    docker:
+      - image: zengemily79/terragrunt:0.78.1
+    steps:
+      - checkout
+      - run:
+          name: Terragrunt Plan
+          command: |
+            cd infra/environments/develop/lambda_edge
+            terragrunt plan --all
+
+  apply:
+    docker:
+      - image: zengemily79/terragrunt:0.78.1
+    steps:
+      - checkout
+      - run:
+          name: Terragrunt Apply
+          command: |
+            cd infra/environments/develop/lambda_edge
+            terragrunt apply --all --non-interactive
+
+workflows:
+  version: 2
+  deploy:
+    jobs:
+      - plan
+      - hold-apply:
+          type: approval
+          requires:
+            - plan
+      - apply:
+          requires:
+            - hold-apply
